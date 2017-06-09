@@ -18,7 +18,7 @@ public class UserService {
 
     Set<User> users = new HashSet<>();
 
-    @Cacheable(value="#user",key="new String(#id)")
+    @Cacheable(value="user",key="#id")
     public User getUserById(int id) {
         System.out.println("cache miss, invoke find by id, id:" + id);
         for (User user : users) {
@@ -29,11 +29,12 @@ public class UserService {
         return null;
     }
 
-    @Caching(
-            put = {
-                    @CachePut(value = "user", key = "#user.id")
-            }
-    )
+//    @Caching(
+//            put = {
+//                    @CachePut(value = "user", key = "#user.id",keyGenerator = "myKeyGenerator")
+//            }
+//    )
+    @Cacheable(value="user", key = "#user.id")
     public User save(User user) {
         users.add(user);
         return user;
