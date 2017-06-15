@@ -39,29 +39,5 @@
     <context:component-scan
             base-package="my.ch.spring.cache.service">
     </context:component-scan>
-    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true" />
-    <!-- Jedis ConnectionFactory -->
-    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <!--<property name="poolConfig" ref="poolConfig" />-->
-        <property name="port" value="${redis.port}" />
-        <property name="hostName" value="${redis.hostname}" />
-        <!-- <property name="password" value="${redis.password}" /> -->
-        <property name="timeout" value="${redis.timeout}"></property>
-    </bean>
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="jedisConnectionFactory">
-        <property name="connectionFactory" ref="jedisConnectionFactory"></property>
-        <!--<property name="defaultSerializer">-->
-            <!--<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>-->
-        <!--</property>-->
-        <property name="keySerializer">
-            <bean class="org.springframework.data.redis.serializer.GenericToStringSerializer">
-            <constructor-arg name="type" value="java.lang.Object" />
-            </bean>
-        </property>
-    </bean>
-    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
-        <constructor-arg ref="redisTemplate" />
-        <property name="usePrefix" value="true"/>
-    </bean>
-    <!--<bean id="myKeyGenerator" class="my.ch.spring.cache.MyKeyGenerator"/>-->
+    <import resource="redis/redis-config.xml"/>
 </beans>

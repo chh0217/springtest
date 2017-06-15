@@ -13,44 +13,13 @@ import java.util.Set;
 /**
  * Created by chenh on 2017/6/5.
  */
-@Service
-public class UserService {
+public interface UserService {
 
-    Set<User> users = new HashSet<>();
 
-    @Cacheable(value="user",key="#id")
-    public User getUserById(int id) {
-        System.out.println("cache miss, invoke find by id, id:" + id);
-        for (User user : users) {
-            if (user.getId().equals(id)) {
-                return user;
-            }
-        }
-        return null;
-    }
+    public User getUserById(int id);
 
-//    @Caching(
-//            put = {
-//                    @CachePut(value = "user", key = "#user.id",keyGenerator = "myKeyGenerator")
-//            }
-//    )
-    @Cacheable(value="user", key = "#user.id")
-    public User save(User user) {
-        users.add(user);
-        return user;
-    }
+    public User save(User user);
 
-    @CacheEvict(value="user",key="#user.id")
-    public void removeUserById(int id) {
-    }
+    public void removeUserById(int id);
 
-//    @Caching{
-//        cacheable={@Cacheable(value="",key=""),
-//        put={
-//        @Cacheable(cache)
-//        }
-//    }
-//    public List<User> findByUserName(){
-//
-//    }
 }

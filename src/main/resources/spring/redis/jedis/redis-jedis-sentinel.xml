@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- Jedis ConnectionFactory -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg ref="sentinelConfig"/>
+        <constructor-arg ref="poolConfig"/>
+    </bean>
+
+    <bean id="sentinelConfig"
+          class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <constructor-arg name="propertySource" ref="mapPropertySource"/>
+    </bean>
+    <bean id="mapPropertySource" class="org.springframework.core.env.MapPropertySource">
+        <constructor-arg name="name" value="sentinelMap"/>
+        <constructor-arg name="source">
+            <map>
+                <entry key="spring.redis.sentinel.master" value="${spring.redis.sentinel.master}"/>
+                <entry key="spring.redis.sentinel.nodes" value="${spring.redis.sentinel.nodes}"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="200" />
+        <property name="maxTotal" value="2048" />
+        <property name="maxWaitMillis" value="1500" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="true" />
+        <!--<property name="maxIdle" value="${redis.pool.maxIdle}" />-->
+        <!--<property name="maxTotal" value="${redis.pool.maxActive}" />-->
+        <!--<property name="maxWaitMillis" value="${redis.pool.maxWait}" />-->
+        <!--<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />-->
+        <!--<property name="testOnReturn" value="${redis.pool.testOnReturn}" />-->
+    </bean>
+</beans>

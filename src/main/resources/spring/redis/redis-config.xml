@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+    <context:property-placeholder ignore-resource-not-found="true"
+                                  location="classpath*:/config.properties" />
+
+    <!--
+     配置数据源
+     destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用
+    -->
+    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">-->
+    <!--&lt;!&ndash; Connection Info &ndash;&gt;-->
+    <!--<property name="driverClassName" value="${jdbc.driver}" />-->
+    <!--<property name="url" value="${jdbc.url}" />-->
+    <!--<property name="username" value="${jdbc.username}" />-->
+    <!--<property name="password" value="${jdbc.password}" />-->
+    <!--<property name="maxActive" value="${jdbc.pool.maxActive}" />-->
+    <!--<property name="minIdle" value="0" />-->
+    <!--<property name="defaultAutoCommit" value="false" />-->
+    <!--&lt;!&ndash; 连接Idle10分钟后超时，每1分钟检查一次 &ndash;&gt;-->
+    <!--<property name="timeBetweenEvictionRunsMillis" value="60000" />-->
+    <!--<property name="minEvictableIdleTimeMillis" value="600000" />-->
+    <!--<property name="filters" value="stat" />-->
+    <!--</bean>-->
+
+    <!-- MyBatis配置 -->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+    <!--<property name="dataSource" ref="dataSource" />-->
+    <!--&lt;!&ndash; 自动扫描entity目录, 省掉Configuration.xml里的手工配置 &ndash;&gt;-->
+    <!--<property name="typeAliasesPackage" value="ch.spring.cache.domain" />-->
+    <!--&lt;!&ndash; 显式指定Mapper文件位置 &ndash;&gt;-->
+    <!--<property name="mapperLocations" value="classpath:/mybatis/*Mapper.xml" />-->
+    <!--&lt;!&ndash; 显式配置Configuration &ndash;&gt;-->
+    <!--<property name="configLocation" value="classpath:/mybatis-config.xml"/>-->
+    <!--</bean>-->
+    <context:component-scan
+            base-package="my.ch.spring.cache.service">
+    </context:component-scan>
+    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true" />
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="connectionFactory">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.GenericToStringSerializer">
+                <constructor-arg name="type" value="java.lang.Object" />
+            </bean>
+        </property>
+    </bean>
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg ref="redisTemplate" />
+        <property name="usePrefix" value="true"/>
+    </bean>
+    <import resource="jedis/redis-jedis.xml"/>
+</beans>
