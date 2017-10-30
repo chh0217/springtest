@@ -1,9 +1,9 @@
 package my.ch.spring.cache.service.impl;
 
+import my.ch.spring.cache.dao.UserDao;
 import my.ch.spring.cache.domain.User;
 import my.ch.spring.cache.service.UserService;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -16,39 +16,43 @@ import java.util.Set;
 public class UserServiceImpl implements UserService{
     Set<User> users = new HashSet<>();
 
-    @Cacheable(value="user",key="#id")
-    public User getUserById(int id) {
-        System.out.println("cache miss, invoke find by id, id:" + id);
-        for (User user : users) {
-            if (user.getId().equals(id)) {
-                return user;
-            }
-        }
-        return null;
+    @Autowired
+    public UserDao userDao;
+
+    @Override
+    public User getUserById(Long id) {
+        return userDao.get(id);
     }
 
-    //    @Caching(
-//            put = {
-//                    @CachePut(value = "user", key = "#user.id",keyGenerator = "myKeyGenerator")
+    @Override
+    public void save(User user) {
+        userDao.insert(user);
+    }
+
+    @Override
+    public void removeUserById(Long id) {
+        int a = 0/0;
+        userDao.deleteById(id);
+    }
+
+
+//    public User getUserById(int id) {
+//        System.out.println("cache miss, invoke find by id, id:" + id);
+//        for (User user : users) {
+//            if (user.getId().equals(id)) {
+//                return user;
 //            }
-//    )
-    @Cacheable(value="user", key = "#user.id")
-    public User save(User user) {
-        users.add(user);
-        return user;
-    }
-
-    @CacheEvict(value="user",key="#user.id")
-    public void removeUserById(int id) {
-    }
-
-//    @Caching{
-//        cacheable={@Cacheable(value="",key=""),
-//        put={
-//        @Cacheable(cache)
 //        }
+//        return null;
 //    }
-//    public List<User> findByUserName(){
 //
+//    public User save(User user) {
+//        users.add(user);
+//        return user;
 //    }
+//
+//    @CacheEvict(value="user",key="#user.id")
+//    public void removeUserById(int id) {
+//    }
+
 }

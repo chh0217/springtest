@@ -6,19 +6,25 @@ import java.io.Serializable;
  * Created by chenh on 2017/6/5.
  */
 public class User implements Serializable{
-    private Integer id;
+    private Long id;
     private String name;
+    private String mobile;
+    private String address;
 
-    public User(Integer id,String name){
+    public User(){}
+
+    public User(Long id,String name,String mobile,String address){
         this.id = id;
         this.name = name;
+        this.mobile = mobile;
+        this.address = address;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,19 +36,19 @@ public class User implements Serializable{
         this.name = name;
     }
 
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-
-        return true;
+    public String getMobile() {
+        return mobile;
     }
 
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

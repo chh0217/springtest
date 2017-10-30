@@ -39,8 +39,9 @@
     <context:component-scan
             base-package="my.ch.spring.cache.service">
     </context:component-scan>
-    <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true" />
-
+    <!--<cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true" key-generator="myKeyGenerator"/>-->
+    <cache:annotation-driven cache-manager="cacheManager"/>
+    <!--<bean id="myKeyGenerator" class="my.ch.spring.cache.MyKeyGenerator" />-->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="connectionFactory">
         <property name="connectionFactory" ref="connectionFactory"></property>
         <property name="keySerializer">
@@ -52,6 +53,7 @@
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg ref="redisTemplate" />
         <property name="usePrefix" value="true"/>
+        <property name="defaultExpiration" value="5"/>
     </bean>
     <import resource="jedis/redis-jedis.xml"/>
 </beans>
