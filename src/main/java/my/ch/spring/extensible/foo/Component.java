@@ -1,0 +1,29 @@
+package my.ch.spring.extensible.foo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by chenh on 2017/10/31.
+ */
+public class Component {
+    private String name;
+    private List<Component> components = new ArrayList<>();
+
+    // mmm, there is no setter method for the 'components'
+    public void addComponent(Component component) {
+        this.components.add(component);
+    }
+
+    public List<Component> getComponents() {
+        return components;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
