@@ -53,7 +53,7 @@
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg ref="redisTemplate" />
         <property name="usePrefix" value="true"/>
-        <property name="defaultExpiration" value="10"/>
+        <property name="defaultExpiration" value="5"/>
     </bean>
     <import resource="jedis/redis-jedis.xml"/>
 </beans>

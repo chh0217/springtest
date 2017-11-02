@@ -9,28 +9,28 @@
         <!-- <property name="password" value="${redis.password}" /> -->
         <property name="timeout" value="${redis.timeout}"></property>
     </bean>
-    <!--<bean id="consumerListener" class="my.ch.spring.cache.redisListener.ConsumerListener"/>
-    <bean id="redisMessageListenerContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
-        <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="messageListeners">
-            <map>
-                <entry key-ref="consumerListener">
-                    <list>
-                        <bean class="org.springframework.data.redis.listener.ChannelTopic">
-                            <constructor-arg value="__keyevent@0__:expired" />
-                        </bean>
-                        &lt;!&ndash;<bean class="org.springframework.data.redis.listener.ChannelTopic">&ndash;&gt;
-                            &lt;!&ndash;<constructor-arg value="__keyevent@1__:expired" />&ndash;&gt;
-                        &lt;!&ndash;</bean>&ndash;&gt;
-                        &lt;!&ndash;<bean class="org.springframework.data.redis.listener.PatternTopic">&ndash;&gt;
-                            &lt;!&ndash;<constructor-arg value="*" />&ndash;&gt;
-                        &lt;!&ndash;</bean>&ndash;&gt;
-                        &lt;!&ndash;<bean class="org.springframework.data.redis.listener.PatternTopic">&ndash;&gt;
-                            &lt;!&ndash;<constructor-arg value="__key*__:*" />&ndash;&gt;
-                        &lt;!&ndash;</bean>&ndash;&gt;
-                    </list>
-                </entry>
-            </map>
-        </property>
-    </bean>-->
+    <!--<bean id="consumerListener" class="my.ch.spring.cache.redisListener.ConsumerListener"/>-->
+    <!--<bean id="redisMessageListenerContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">-->
+        <!--<property name="connectionFactory" ref="connectionFactory"/>-->
+        <!--<property name="messageListeners">-->
+            <!--<map>-->
+                <!--<entry key-ref="consumerListener">-->
+                    <!--<list>-->
+                        <!--<bean class="org.springframework.data.redis.listener.ChannelTopic">-->
+                            <!--<constructor-arg value="__keyevent@0__:expired" />-->
+                        <!--</bean>-->
+                        <!--&lt;!&ndash;<bean class="org.springframework.data.redis.listener.ChannelTopic">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<constructor-arg value="__keyevent@1__:expired" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</bean>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<bean class="org.springframework.data.redis.listener.PatternTopic">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<constructor-arg value="*" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</bean>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<bean class="org.springframework.data.redis.listener.PatternTopic">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<constructor-arg value="__key*__:*" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</bean>&ndash;&gt;-->
+                    <!--</list>-->
+                <!--</entry>-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
 </beans>

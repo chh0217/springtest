@@ -1,1 +1,1 @@
-http\://www.ch.com/schema/chtest=my.ch.spring.extensible.foo.ComponentNamespaceHandler
+http\://www.mych.com/schema/chtest=my.ch.spring.extensible.foo.MyNamespaceHandler
