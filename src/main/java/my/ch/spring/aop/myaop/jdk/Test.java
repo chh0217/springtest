@@ -8,8 +8,10 @@ import java.lang.reflect.Proxy;
  */
 public class Test {
     public static void main(String[] args) {
-        InvocationHandler handler = new MyHandler();
-        HelloApi hello = (HelloApi)Proxy.newProxyInstance(Hello.class.getClassLoader(),Hello.class.getInterfaces(),handler);
+        HelloApi h = new Hello();
+        InvocationHandler handler = new MyHandler(h);
+        HelloApi hello = (HelloApi)Proxy.newProxyInstance(h.getClass().getClassLoader(),Hello.class.getInterfaces(),handler);
+        hello.sayHello("asdf");
         hello.sayHello();
     }
 }
