@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean name="bean1;alias11,alias12;alias13 alias14" class="my.ch.spring.kt.chapter2.HelloImpl"/>
+    <!-- 当指定id时，name指定的标识符全部为别名 -->
+    <bean id="bean2" name="alias21;alias22" class="my.ch.spring.kt.chapter2.HelloImpl"/>
+</beans>
