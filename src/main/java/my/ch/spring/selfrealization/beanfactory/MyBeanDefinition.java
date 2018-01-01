@@ -184,4 +184,9 @@ public class MyBeanDefinition implements BeanDefinition{
     public String[] attributeNames() {
         return new String[0];
     }
+
+    public Class<?> getBeanClass() {
+        return beanClass;
+    }
+
 }

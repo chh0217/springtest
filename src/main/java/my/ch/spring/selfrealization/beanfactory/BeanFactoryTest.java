@@ -16,6 +16,26 @@ public class BeanFactoryTest {
         MyBeanDefinition myBeanDefinition = new MyBeanDefinition(HelloImpl2.class);
         myBeanDefinition.setBeanClassName("hello");
         myBeanDefinition.setScope(BeanDefinition.SCOPE_SINGLETON);
-        myBeanFactory.
+        myBeanFactory.registerBeanDefinition(myBeanDefinition);
+        HelloImpl2 h = (HelloImpl2)myBeanFactory.getBean("hello");
+        h.sayHello();
+
+         HelloImpl2 h2 = (HelloImpl2)myBeanFactory.getBean("hello");
+        System.out.println(h == h2);
+    }
+
+    @Test
+    public void factoryPrototyteTest(){
+        //先创建bean工厂
+        MyBeanFacotry myBeanFactory = new MyBeanFacotry();
+        MyBeanDefinition myBeanDefinition = new MyBeanDefinition(HelloImpl2.class);
+        myBeanDefinition.setBeanClassName("hello");
+        myBeanDefinition.setScope(BeanDefinition.SCOPE_PROTOTYPE);
+        myBeanFactory.registerBeanDefinition(myBeanDefinition);
+        HelloImpl2 h = (HelloImpl2)myBeanFactory.getBean("hello");
+        h.sayHello();
+
+        HelloImpl2 h2 = (HelloImpl2)myBeanFactory.getBean("hello");
+        System.out.println(h == h2);
     }
 }

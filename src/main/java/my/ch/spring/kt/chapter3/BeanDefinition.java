@@ -6,15 +6,15 @@ package my.ch.spring.kt.chapter3;
  */
 public class BeanDefinition {
     //单例
-    public static final int SCOPE_SINGLETON = 0;
+    public static final String SCOPE_SINGLETON = "singleton";
     //原型
-    public static final int SCOPE_PROTOTYPE = 1;
+    public static final String SCOPE_PROTOTYPE = "prototype";
     //唯一标识
     private String id;
     //class全限定名
     private String clazz;
     //作用域
-    private int scope = SCOPE_SINGLETON;
+    private String scope = SCOPE_SINGLETON;
 
     public String getId() {
         return id;
@@ -32,11 +32,11 @@ public class BeanDefinition {
         this.clazz = clazz;
     }
 
-    public int getScope() {
+    public String getScope() {
         return scope;
     }
 
-    public void setScope(int scope) {
+    public void setScope(String scope) {
         this.scope = scope;
     }
 }

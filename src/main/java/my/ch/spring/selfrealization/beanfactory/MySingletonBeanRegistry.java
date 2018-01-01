@@ -28,7 +28,7 @@ public class MySingletonBeanRegistry implements SingletonBeanRegistry {
 
     @Override
     public boolean containsSingleton(String beanName) {
-        return false;
+        return null != BEAN_MAP.get(beanName);
     }
 
     @Override

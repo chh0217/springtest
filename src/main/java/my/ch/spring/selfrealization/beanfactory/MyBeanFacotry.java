@@ -1,5 +1,6 @@
 package my.ch.spring.selfrealization.beanfactory;
 
+import my.ch.spring.kt.chapter3.BeanDefinition;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -20,9 +21,31 @@ public class MyBeanFacotry implements BeanFactory {
 
     @Override
     public Object getBean(String name) throws BeansException {
-        //如果是单例
-        if(!beanDefinitionMap.containsKey(name)){
+
+         if(!beanDefinitionMap.containsKey(name)){
             throw new RuntimeException("不存在[" + name + "]Bean定义");
+        }
+        MyBeanDefinition de = beanDefinitionMap.get(name);
+        //如果是单例
+        if(BeanDefinition.SCOPE_SINGLETON == de.getScope()){
+             //不存在
+            if(!singletonBeanRegistry.containsSingleton(name)){
+                singletonBeanRegistry.registerSingleton(name,create(de));
+            }
+            //如果存在 直接返回
+            return singletonBeanRegistry.getSingleton(name);
+        }
+        //多例
+        return create(de);
+    }
+
+    private Object create(MyBeanDefinition definition){
+        try {
+            return definition.getBeanClass().newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
         return null;
     }
