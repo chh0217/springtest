@@ -1,4 +1,4 @@
-package my.ch.spring.selfrealization.beanfactory;
+package my.ch.spring.selfrealization.beanfactory.mybeanfactory;
 
 import my.ch.spring.kt.chapter3.BeanDefinition;
 import org.springframework.beans.BeansException;

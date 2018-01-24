@@ -1,4 +1,4 @@
-package my.ch.spring.selfrealization.beanfactory;
+package my.ch.spring.selfrealization.beanfactory.mybeanfactory;
 
 import my.ch.spring.kt.chapter2.HelloImpl2;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
  * @author chenh
  * @date 2017/12/29.
  */
-public class BeanFactoryTest {
+public class MyBeanFactoryTest {
     @Test
     public void factoryTest(){
         //先创建bean工厂

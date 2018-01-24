@@ -1,4 +1,4 @@
-package my.ch.spring.selfrealization.beanfactory;
+package my.ch.spring.selfrealization.beanfactory.mybeanfactory;
 
 import org.springframework.beans.factory.config.SingletonBeanRegistry;
 
