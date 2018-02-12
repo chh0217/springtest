@@ -5,5 +5,10 @@
         xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <!-- id 表示你这个组件的名字，class表示组件类 -->
-    <bean id="hello" class="my.ch.spring.kt.chapter2.HelloImpl"></bean>
+    <bean id="hello" class="my.ch.spring.kt.chapter2.HelloImpl" lazy-init="true"></bean>
+    <bean id="hello1" class="my.ch.spring.kt.chapter2.HelloImpl" ></bean>
+    <bean id="helloBean" class="my.ch.spring.kt.chapter2.HelloFactoryBean" >
+        <property name="name" value="allen"/>
+        <property name="word" value="xixihaha"/>
+    </bean>
 </beans>
