@@ -1,1 +1,3 @@
 http\://www.mych.com/schema/chtest=my.ch.spring.extensible.foo.MyNamespaceHandler
+http\://www.mych.com/schema/user=my.ch.spring.customtag.MyNamespaceHandler
+
